@@ -168,6 +168,12 @@ void parse_file ( char * filename,
       sscanf(line, "%lf %lf %lf %lf",
              xvals, yvals, zvals, &r);
       add_circle( edges, xvals[0], yvals[0], zvals[0], r, step);
+
+      tmp = peek(csystems);
+      matrix_mult(tmp, edges);
+      //print_matrix(polygons);
+      draw_lines(edges, s,c);
+      edges->lastcol = 0;
     }//end of circle
 
     else if ( strncmp(line, "hermite", strlen(line)) == 0 ||
@@ -192,6 +198,12 @@ void parse_file ( char * filename,
           //printf("%d\n", type);
           add_curve( edges, xvals[0], yvals[0], xvals[1], yvals[1],
                      xvals[2], yvals[2], xvals[3], yvals[3], step, type);
+
+                     tmp = peek(csystems);
+                     matrix_mult(tmp, edges);
+                     //print_matrix(polygons);
+                     draw_lines(edges, s,c);
+                     edges->lastcol = 0;
         }//end of curve
         else if ( strncmp(line, "line", strlen(line)) == 0 ) {
           fgets(line, sizeof(line), f);
@@ -205,6 +217,12 @@ void parse_file ( char * filename,
             xvals[1], yvals[1], zvals[1]) */
           add_edge(edges, xvals[0], yvals[0], zvals[0],
                    xvals[1], yvals[1], zvals[1]);
+
+                   tmp = peek(csystems);
+                   matrix_mult(tmp, edges);
+                   //print_matrix(polygons);
+                   draw_lines(edges, s,c);
+                   edges->lastcol = 0;
         }//end line
 
         else if ( strncmp(line, "scale", strlen(line)) == 0 ) {
