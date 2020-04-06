@@ -138,6 +138,12 @@ void parse_file ( char * filename,
       sscanf(line, "%lf %lf %lf %lf",
        xvals, yvals, zvals, &r);
       add_sphere( polygons, xvals[0], yvals[0], zvals[0], r, step_3d);
+
+      tmp = peek(csystems);
+      matrix_mult(tmp, polygons);
+      //print_matrix(polygons);
+      draw_polygons(polygons, s,c);
+      polygons->lastcol = 0;
     }//end of sphere
 
     else if ( strncmp(line, "torus", strlen(line)) == 0 ) {
@@ -147,6 +153,12 @@ void parse_file ( char * filename,
       sscanf(line, "%lf %lf %lf %lf %lf",
        xvals, yvals, zvals, &r, &r1);
       add_torus( polygons, xvals[0], yvals[0], zvals[0], r, r1, step_3d);
+
+      tmp = peek(csystems);
+      matrix_mult(tmp, polygons);
+      //print_matrix(polygons);
+      draw_polygons(polygons, s,c);
+      polygons->lastcol = 0;
     }//end of torus
 
     else if ( strncmp(line, "circle", strlen(line)) == 0 ) {
