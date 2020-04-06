@@ -50,4 +50,6 @@ rotate
 z -60
 box
 -100 0 20 100 10 40
-display
+# display
+save
+peanut.png
